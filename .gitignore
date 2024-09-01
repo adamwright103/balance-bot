@@ -1,0 +1,31 @@
+/.vscode
+
+# CLion specific files
+/.idea
+*.iml
+
+# Compiled object files
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
+
+# Libraries
+lib/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.tmp
+*.swp
+*.swo
+*.swn
