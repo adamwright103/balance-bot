@@ -1,14 +1,19 @@
 #include <Arduino.h>
+#include "mpu.h"
+#include <string>
+
+using namespace std;
+
+Mpu *mpu = new Mpu();
 
 void setup() {
-  // put your setup code here, to run once:
-  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(19200);
+  mpu->Initialize();
+
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(1000);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(1000);
+  mpu->Calibrate();
+  mpu->PrintAccelOffsets();
+  delay(1000);
 }

@@ -1,21 +1,26 @@
 # Balance Bot
 
-Welcome to my Balance Bot project! The goal of this project is to experiment with the principles of control systems, understand basic electronic principles, and further my R&D abillities.
+Welcome to my Balance Bot project! The goal of this project is to experiment with the principles of control systems,
+understand basic electronic principles, and further my R&D abillities.
 
 ## Project Overview
 
 The Balance Bot is a self-balancing robot with the following key features:
 
 - **Two-Wheeled Design**: The robot is equipped with two wheels, which allow it to move and balance on its own.
-- **PID Control System**: The robot uses a PID control algorithm to maintain its balance. The system continuously adjusts the motor speeds to keep the robot upright.
-- **Sensor Integration**: The bot utilizes sensors like accelerometers and gyroscopes to monitor its orientation and make real-time adjustments.
-- **Microcontroller**: The bot is controlled by an Arduino Uno that processes the MPU6050 and executes the PID control algorithm.
+- **PID Control System**: The robot uses a PID control algorithm to maintain its balance. The system continuously
+  adjusts the motor speeds to keep the robot upright.
+- **Sensor Integration**: The bot utilizes sensors like accelerometers and gyroscopes to monitor its orientation and
+  make real-time adjustments.
+- **Microcontroller**: The bot is controlled by an Arduino Uno that processes the MPU6050 and executes the PID control
+  algorithm.
 
 ## Features
 
 - **Self-Balancing**: The main feature of the Balance Bot is its ability to stay upright on its own.
 - **Real-Time Feedback**: The robot continuously monitors its position and adjusts motor speeds accordingly.
-- **Customizable PID Parameters**: The PID control parameters can be fine-tuned to achieve optimal balance and stability.
+- **Customizable PID Parameters**: The PID control parameters can be fine-tuned to achieve optimal balance and
+  stability.
 
 ## Getting Started
 
@@ -33,3 +38,9 @@ The Balance Bot is a self-balancing robot with the following key features:
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/adamwright103/balance-bot.git
+
+### Credits
+
+- [MPU6050 Datasheet](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf)
+- [Arduino and MPU6050 Accelerometer and Gyroscope Tutorial](https://howtomechatronics.com/tutorials/arduino/arduino-and-mpu6050-accelerometer-and-gyroscope-tutorial/#google_vignette)
+    - Author: [Dejan](https://howtomechatronics.com/author/howtom12_wp/)
