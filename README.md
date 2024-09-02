@@ -44,3 +44,4 @@ The Balance Bot is a self-balancing robot with the following key features:
 - [MPU6050 Datasheet](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf)
 - [Arduino and MPU6050 Accelerometer and Gyroscope Tutorial](https://howtomechatronics.com/tutorials/arduino/arduino-and-mpu6050-accelerometer-and-gyroscope-tutorial/#google_vignette)
     - Author: [Dejan](https://howtomechatronics.com/author/howtom12_wp/)
+- [How to Use a Three-Axis Accelerometer for Tilt Sensing](https://wiki.dfrobot.com/How_to_Use_a_Three-Axis_Accelerometer_for_Tilt_Sensing)
