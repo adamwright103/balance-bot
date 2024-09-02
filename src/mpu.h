@@ -9,13 +9,17 @@ class Mpu {
   std::array<double, 3> accel_data_;
   std::array<double, 3> accel_offsets_;
 
-  std::array<double, 3> ReadUncalibratedAccelData();
+  std::array<double, 3> ReadUncalibratedAccelData() const;
 
  public:
   Mpu();
   bool Initialize();
 
   void Calibrate();
+  void UpdateAccelData();
+  double CalculatePitch() const;
+  double CalculateRoll() const;
+
   void PrintAccelData() const;
   void PrintAccelOffsets() const;
   std::array<double, 3> GetAccelData() const;

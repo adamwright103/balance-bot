@@ -7,7 +7,7 @@ using namespace std;
 
 const int MPU_ADDRESS = 0x68;
 
-Mpu::Mpu() : accel_data_{0, 0, 0}, accel_offsets_{-0.01, -0.01, 0.11} {
+Mpu::Mpu() : accel_data_{0, 0, 0}, accel_offsets_{0.005, 0.005, 0.105} {
   // offsets based on previous calibration
 }
 
@@ -26,10 +26,10 @@ bool Mpu::Initialize() {
   return true;
 }
 
-std::array<double, 3> Mpu::ReadUncalibratedAccelData() {
+std::array<double, 3> Mpu::ReadUncalibratedAccelData() const {
   /** Read the accelerometer data, this function does
    * not account for offsets, so use with caution
-   * */
+   */
 
   // begin transmission
   Wire.beginTransmission(MPU_ADDRESS);
@@ -38,7 +38,7 @@ std::array<double, 3> Mpu::ReadUncalibratedAccelData() {
    *  0x3B (ACCEL_XOUT_H) + 0x3C (ACCEL_XOUT_L)
    *  0x3D (ACCEL_YOUT_H) + 0x3E (ACCEL_YOUT_L)
    *  0x3F (ACCEL_ZOUT_H) + 0x40 (ACCEL_ZOUT_L)
-   * */
+   */
   Wire.write(0x3B);  // start with 0x3B
   Wire.endTransmission(false);
 
@@ -54,10 +54,11 @@ std::array<double, 3> Mpu::ReadUncalibratedAccelData() {
 }
 
 void Mpu::Calibrate() {
-  // Calibrate the accelerometer by taking avg of 50 samples
+  // Calibrate the accelerometer by taking avg of 500 samples
+  Serial.println("Calibrating accelerometer...");
   array<double, 3> accel_sum{0, 0, 0};
   array<double, 3> collected_accel_data = ReadUncalibratedAccelData();
-  for (int i = 0; i < 49; i++) {
+  for (int i = 0; i < 499; i++) {
     accel_sum[0] += collected_accel_data[0];
     accel_sum[1] += collected_accel_data[1];
 
@@ -68,9 +69,11 @@ void Mpu::Calibrate() {
     delay(10);
   }
 
-  accel_offsets_[0] = accel_sum[0] / 50.0;
-  accel_offsets_[1] = accel_sum[1] / 50.0;
-  accel_offsets_[2] = accel_sum[2] / 50.0;
+  accel_offsets_[0] = accel_sum[0] / 500.0;
+  accel_offsets_[1] = accel_sum[1] / 500.0;
+  accel_offsets_[2] = accel_sum[2] / 500.0;
+
+  Serial.println("Calibrated!");
 }
 
 void Mpu::PrintAccelData() const {
@@ -101,4 +104,20 @@ void Mpu::PrintAccelOffsets() const {
   Serial.println();
 }
 
-array<double, 3> Mpu::GetAccelData() const { return accel_data_; }
+void Mpu::UpdateAccelData() {
+  // update the calibrated accelerometer data
+  accel_data_ = ReadUncalibratedAccelData();
+  for (int i = 0; i < 3; i++) {
+    accel_data_[i] += accel_offsets_[i];
+  }
+}
+
+double Mpu::CalculatePitch() const {
+  return atan(accel_data_[0] / accel_data_[2]) * 180 / 3.14;
+}
+
+double Mpu::CalculateRoll() const {
+  return atan(accel_data_[1] / accel_data_[2]) * 180 / 3.14;
+}
+
+std::array<double, 3> Mpu::GetAccelData() const { return accel_data_; }
