@@ -14,6 +14,7 @@ class PidController {
 
   unsigned long prev_time_;
   unsigned int sample_time_;
+  int last_theta_;
 
  public:
   PidController(std::array<double, 3> &k_params);
